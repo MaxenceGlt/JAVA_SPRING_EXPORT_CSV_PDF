@@ -9,11 +9,9 @@ import java.util.List;
 public class LigneFacture {
 
     @ManyToOne
-    @JoinColumn(name = "id")
     private Facture facture;
 
     @ManyToOne
-    @JoinColumn(name = "id")
     private Article article;
 
     @Id

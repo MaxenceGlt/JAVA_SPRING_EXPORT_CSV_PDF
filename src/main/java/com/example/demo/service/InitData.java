@@ -38,14 +38,17 @@ public class InitData implements ApplicationListener<ApplicationReadyEvent> {
         Client c1 = createClient("prenom1","testprenom",LocalDate.of(2000,03,18));
         Client c2 = createClient("prenom2","testprenom",LocalDate.of(2000,04,20));
         Client c3 = createClient("prenom3","testprenom",LocalDate.of(2000,06,03));
-        LigneFacture l1 = createLigneFactures(a1,2);
-        LigneFacture l2 = createLigneFactures(a2,1);
-        LigneFacture l3 = createLigneFactures(a2,1);
-        List<LigneFacture> ligneFactures = null;
-        ligneFactures.add(l1);
-        ligneFactures.add(l2);
-        ligneFactures.add(l3);
-        Facture f1 = createFacture(c1,ligneFactures);
+
+        Facture f1 = createFacture(c1);
+        createLigneFactures(a1, f1, 5);
+        createLigneFactures(a2, f1, 3);
+        createLigneFactures(a3, f1, 8);
+        // Création facture
+        Facture f2 = createFacture(c1);
+        createLigneFactures(a3, f2, 2);
+
+        Facture f3 = createFacture(c2);
+        createLigneFactures(a1, f3, 10);
        // System.out.println(String.valueOf(f1.getTotal()));
 
     }
@@ -68,17 +71,17 @@ public class InitData implements ApplicationListener<ApplicationReadyEvent> {
         return c1;
     }
 
-    private Facture createFacture(Client client, List<LigneFacture> ligneFactures){
+    private Facture createFacture(Client client){
         Facture facture = new Facture();
         facture.setClient(client);
-        facture.setLigneFactures(ligneFactures);
         entityManager.persist(facture);
         return facture;
     }
 
-    private LigneFacture createLigneFactures(Article article,int quantite){
+    private LigneFacture createLigneFactures(Article article,Facture facture, Integer quantite){
         LigneFacture ligneFacture = new LigneFacture();
         ligneFacture.setArticle(article);
+        ligneFacture.setFacture(facture);
         ligneFacture.setQuantite(quantite);
         entityManager.persist(ligneFacture);
         return ligneFacture;

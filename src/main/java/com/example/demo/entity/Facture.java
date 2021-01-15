@@ -9,7 +9,6 @@ import java.util.List;
 public class Facture {
 
     @ManyToOne
-    @JoinColumn(name = "id")
     private Client client;
 
     @OneToMany(mappedBy = "facture", cascade = CascadeType.REMOVE)

@@ -9,9 +9,6 @@ import java.util.List;
 @Entity
 public class Client {
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("client")
-    private List<Facture> factures;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,14 +53,6 @@ public class Client {
 
     public void setDateNaissance(LocalDate dateNaissance){
         this.dateNaissance=dateNaissance;
-    }
-
-    public List<Facture> getFactures() {
-        return factures;
-    }
-
-    public void setFactures(List<Facture> factures) {
-        this.factures = factures;
     }
 
 }

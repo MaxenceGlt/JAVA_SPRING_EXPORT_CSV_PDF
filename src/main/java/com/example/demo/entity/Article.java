@@ -11,10 +11,6 @@ import java.util.List;
 @Entity
 public class Article {
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("article")
-    private List<LigneFacture> ligneFactures;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -60,12 +56,5 @@ public class Article {
         this.stock = stock;
     }
 
-    public List<LigneFacture> getLigneFactures() {
-        return ligneFactures;
-    }
-
-    public void setLigneFactures(List<LigneFacture> ligneFactures) {
-        this.ligneFactures = ligneFactures;
-    }
 
 }
